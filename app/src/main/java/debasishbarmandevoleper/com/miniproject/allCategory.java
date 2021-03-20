@@ -8,6 +8,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.TextureView;
+import android.view.animation.AnimationUtils;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
@@ -31,6 +34,7 @@ import Models.resModel;
 public class allCategory extends AppCompatActivity {
 
     RecyclerView mainRview;
+    private TextView tv1;
     myResAdapter adapter;
     private FirebaseFirestore db=FirebaseFirestore.getInstance();
     private FirebaseAuth auth=FirebaseAuth.getInstance();
@@ -39,6 +43,8 @@ public class allCategory extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_all_category);
 
+        tv1=findViewById(R.id.log);
+        tv1.setAnimation(AnimationUtils.loadAnimation(this,R.anim.translate_hide));
         mainRview=findViewById(R.id.mainRec);
         mainRview.setLayoutManager(new GridLayoutManager(this,2));
 

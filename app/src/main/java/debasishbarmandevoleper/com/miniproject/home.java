@@ -3,7 +3,9 @@ package debasishbarmandevoleper.com.miniproject;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
@@ -36,7 +38,7 @@ public class home extends AppCompatActivity {
 
     private Button loginBtn, regBtn;
     private EditText username, password;
-    TextView register;
+    private TextView register,forgotPassword;
     FirebaseAuth fAuth = FirebaseAuth.getInstance();
     FirebaseFirestore fStore=FirebaseFirestore.getInstance();
     DocumentReference dRefs;
@@ -48,12 +50,11 @@ public class home extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-
+        forgotPassword=findViewById(R.id.textView55);
         loginBtn = findViewById(R.id.login);
         username = findViewById(R.id.editTextTextEmailAddress);
         password = findViewById(R.id.editTextTextPassword);
         register = findViewById(R.id.textView54);
-
 
         progressDialog=new ProgressDialog(this);
         progressDialog.setMessage("Wait");
@@ -71,6 +72,29 @@ public class home extends AppCompatActivity {
             public void onClick(View view) {
                 startActivity(new Intent(home.this,SignUp.class));
                 finish();
+            }
+        });
+
+        forgotPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                EditText txt=new EditText(view.getContext());
+                AlertDialog.Builder dialog=new AlertDialog.Builder(view.getContext());
+                dialog.setTitle("Reset Password");
+                dialog.setMessage("Enter your email");
+                dialog.setView(txt);
+                dialog.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        Toast.makeText(home.this, "Yes clicked", Toast.LENGTH_SHORT).show();
+                    }
+                });
+                dialog.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        Toast.makeText(home.this, "No Clicked", Toast.LENGTH_SHORT).show();
+                    }
+                });
             }
         });
 
@@ -134,76 +158,6 @@ public class home extends AppCompatActivity {
             }
         }
     }
-
-   /* private void RegisterAdmin() {
-        String u, p;
-        u = username.getText().toString().trim();
-        p = password.getText().toString().trim();
-
-        //check if checkbox is empty
-        if (!(isAdmin.isChecked() || isUser.isChecked())) {
-            Toast.makeText(home.this, "Select Account Type", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        //check if field is empty
-        if ((TextUtils.isEmpty(u) || TextUtils.isEmpty(p))) {
-            username.setError("Email is empty");
-            password.setError("Password is empty");
-            return;
-        } else {
-            // Toast.makeText(home.this, ""+u+"Pass"+p, Toast.LENGTH_SHORT).show();
-            //Toast.makeText(home.this, "clicked", Toast.LENGTH_SHORT).show();
-            try {
-                progressDialog.setMessage("Wait Adding Foods");
-                progressDialog.show();
-
-                fAuth.createUserWithEmailAndPassword(username.getText().toString().trim(), password.getText().toString().trim())
-                        .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                            @Override
-                            public void onComplete(@NonNull Task<AuthResult> task) {
-                                if (task.isSuccessful()) {
-                                    //Toast.makeText(home.this, "Done", Toast.LENGTH_SHORT).show();
-                                    if (flag == 0) {
-                                        dRefs=fStore.collection("Users").document(fAuth.getCurrentUser().getUid());
-                                        Map<String,Object> admin=new HashMap<>();
-                                        admin.put("isAdmin","0");
-                                        dRefs.set(admin);
-
-                                        progressDialog.dismiss();
-                                        Toast.makeText(home.this, "Admin Created Successfully ", Toast.LENGTH_SHORT).show();
-                                        startActivity(new Intent(home.this, AdminProfile.class));
-                                        finish();
-                                    }
-                                    // 1 for normal users
-                                    if (flag == 1) {
-                                        dRefs=fStore.collection("Users").document(fAuth.getCurrentUser().getUid());
-                                        Toast.makeText(home.this, ""+fAuth.getCurrentUser().getUid(), Toast.LENGTH_SHORT).show();
-                                        Map<String,Object> user=new HashMap<>();
-                                        user.put("isUser","1");
-                                        dRefs.set(user);
-
-                                        progressDialog.dismiss();
-
-                                        Toast.makeText(home.this, "User Created Successfully", Toast.LENGTH_SHORT).show();
-                                        startActivity(new Intent(home.this, User_Profile.class));
-                                        finish();
-                                    }
-                                }
-                            }
-                        })
-                        .addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                                Toast.makeText(home.this, e.getMessage() + "Failed to create Account", Toast.LENGTH_SHORT).show();
-                            }
-                        });
-            } catch (Exception e) {
-                Toast.makeText(home.this, "Error found " + e.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-            //startActivity(new Intent(home.this,User_Profile.class));
-        }
-    }*/
 
     @Override
     protected void onStart() {

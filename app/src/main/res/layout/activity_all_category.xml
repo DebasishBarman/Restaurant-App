@@ -6,11 +6,34 @@
     android:layout_height="match_parent"
     tools:context=".allCategory">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/mainRec"
-        android:background="@drawable/customrec"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:layout_editor_absoluteX="136dp"
-        tools:layout_editor_absoluteY="253dp" />
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/log"
+            android:gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:padding="10dp"
+            android:text="Available Restaurant"
+            android:textColor="@color/white"
+            android:textSize="20dp" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/mainRec"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/log"
+            android:background="@drawable/customrec"
+            tools:layout_editor_absoluteX="136dp"
+            tools:layout_editor_absoluteY="253dp" />
+    </RelativeLayout>
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

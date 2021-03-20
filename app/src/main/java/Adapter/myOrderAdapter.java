@@ -53,29 +53,6 @@ public class myOrderAdapter extends FirestoreRecyclerAdapter<finalOrderModel,myO
             @Override
             public void onClick(View view) {
 
-                /*DocumentReference doc=holder.fstore.collection("AcceptedOrder").document(); //Accepting the order and storing it in Accept
-                Map<String,Object> acptOrd =new HashMap<>();
-                acptOrd.put("order_id",model.getOrder_id());
-                acptOrd.put("admin_id",model.getAdmin_id());
-                acptOrd.put("user_id",model.getUser_id());
-                acptOrd.put("food_name", model.getTitle());
-                acptOrd.put("address",model.getAddress());
-                acptOrd.put("doc_id",doc.getId());
-                acptOrd.put("total_price",model.getTotal_price());
-                acptOrd.put("status","1"); //for accepted
-                //future update address;
-                doc.set(acptOrd, SetOptions.merge()).addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void aVoid) {
-                        Toast.makeText(holder.name.getContext(), "Starting to work on Current Order", Toast.LENGTH_SHORT).show();
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(holder.name.getContext(), "Order initialization failed", Toast.LENGTH_SHORT).show();
-                    }
-                });*/
-
                 //getting is of a particular data
                // holder.orderRow.setAnimation(AnimationUtils.loadAnimation(holder.name.getContext(),R.anim.translate_hide));
                 DocumentSnapshot snapshot=getSnapshots().getSnapshot(holder.getAdapterPosition());
@@ -94,24 +71,6 @@ public class myOrderAdapter extends FirestoreRecyclerAdapter<finalOrderModel,myO
                         Toast.makeText(holder.price.getContext(), "Oops Error Occured.", Toast.LENGTH_SHORT).show();
                     }
                 });
-
-
-
-                ///delete after accepting order
-               /* FirebaseFirestore.getInstance().collection("PlacedOrder")
-                        .document(model.getIds()).delete()
-                        .addOnSuccessListener(new OnSuccessListener<Void>() {
-                            @Override
-                            public void onSuccess(Void aVoid) {
-                                Toast.makeText(holder.name.getContext(), "Success", Toast.LENGTH_SHORT).show();
-                            }
-                        })
-                        .addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                              //  Toast.makeText(holder.name.getContext(), "Failed to Delete", Toast.LENGTH_SHORT).show();
-                            }
-                        });*/
             }
         });
 
