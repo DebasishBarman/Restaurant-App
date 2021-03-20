@@ -3,11 +3,13 @@ package Adapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
@@ -37,6 +39,7 @@ public class myOrderAdapter extends FirestoreRecyclerAdapter<finalOrderModel,myO
 
     @Override
     protected void onBindViewHolder(@NonNull myOrderViewHolder holder, int position, @NonNull finalOrderModel model) {
+        holder.orderRow.setAnimation(AnimationUtils.loadAnimation(holder.name.getContext(),R.anim.translate));
         holder.name.setText(model.getTitle());
         holder.price.setText(model.getTotal_price());
         holder.id.setText(model.getOrder_id());
@@ -74,6 +77,7 @@ public class myOrderAdapter extends FirestoreRecyclerAdapter<finalOrderModel,myO
                 });*/
 
                 //getting is of a particular data
+               // holder.orderRow.setAnimation(AnimationUtils.loadAnimation(holder.name.getContext(),R.anim.translate_hide));
                 DocumentSnapshot snapshot=getSnapshots().getSnapshot(holder.getAdapterPosition());
                 String id=snapshot.getId();
                 DocumentReference reference=holder.fstore.collection("PlacedOrder").document(id);
@@ -169,7 +173,7 @@ public class myOrderAdapter extends FirestoreRecyclerAdapter<finalOrderModel,myO
     }
 
     class myOrderViewHolder extends RecyclerView.ViewHolder {
-
+        ConstraintLayout orderRow;
         TextView id,price,qty,name;
         Button accept,reject;
         FirebaseFirestore fstore;
@@ -178,6 +182,7 @@ public class myOrderAdapter extends FirestoreRecyclerAdapter<finalOrderModel,myO
             super(itemView);
             fstore=FirebaseFirestore.getInstance();
             auth=FirebaseAuth.getInstance();
+            orderRow=itemView.findViewById(R.id.orderRow);
             id=itemView.findViewById(R.id.orderID);
             price=itemView.findViewById(R.id.textView18);
             qty=itemView.findViewById(R.id.qtyOrder);

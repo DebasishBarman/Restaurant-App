@@ -92,7 +92,7 @@ public class User_Profile extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         navigationView_users=findViewById(R.id.navigation_users);
 
-        RecyclerView.LayoutManager categorylayoutManager;
+        //RecyclerView.LayoutManager categorylayoutManager;
 
 
         toggle_Users=new ActionBarDrawerToggle(this,drawerLayout_users,R.string.open,R.string.close);
@@ -146,22 +146,23 @@ public class User_Profile extends AppCompatActivity {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
                 SharedPreferences prf=getApplicationContext().getSharedPreferences("name",MODE_PRIVATE);
-                String cate=prf.getString("category","");
-                Toast.makeText(User_Profile.this, ""+cate, Toast.LENGTH_SHORT).show();
+                String admin_id=prf.getString("id","");
+              //  Toast.makeText(User_Profile.this, "id is"+cate, Toast.LENGTH_SHORT).show();
                 String s = documentSnapshot.getString("pincode");
-                if (s == null) {
-                    startActivity(new Intent(User_Profile.this, edit_user.class));
-                   // Toast.makeText(User_Profile.this, "Enter your details first", Toast.LENGTH_SHORT).show();
-                    finish();
-                } else {
+                if (s != null) {
                     CollectionReference cols = firestore.collection("AdminFoods");
-                    Query query = cols.whereEqualTo("pincode", s).whereEqualTo("category",cate);//changes done
+                    Query query = cols.whereEqualTo("admin_id",admin_id);//changes done
                     FirestoreRecyclerOptions<model> options = new FirestoreRecyclerOptions.Builder<model>()
                             .setQuery(query, model.class)
                             .build();
                     adapter = new myAdapter(options);
                     recyclerView.setAdapter(adapter);
                     adapter.startListening();
+                } else {
+
+                    startActivity(new Intent(User_Profile.this, edit_user.class));
+                    // Toast.makeText(User_Profile.this, "Enter your details first", Toast.LENGTH_SHORT).show();
+                    finish();
                 }
             }
         });

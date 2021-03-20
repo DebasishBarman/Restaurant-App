@@ -36,24 +36,21 @@ public class trackAdapter extends FirestoreRecyclerAdapter<trackModel,trackAdapt
         holder.title.setText(model.getTitle());
         holder.price.setText(model.getPrice());
         holder.quantity.setText(model.getQuantity());
+
         DocumentSnapshot snapshot=getSnapshots().getSnapshot(holder.getAdapterPosition());
         String getStatus=snapshot.getString("status");
-        holder.status.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(holder.price.getContext(), ""+getStatus, Toast.LENGTH_SHORT).show();
-            }
-        });
 
         if(Integer.parseInt(getStatus)==2){
             holder.st.setText("Will be delivered shortly");
-            holder.status.setBackgroundResource(R.color.teal_200);
+            holder.status.setBackgroundColor(Color.parseColor("#54e346"));
             // holder.status.setBackgroundColor(Color.parseColor(""));
         }
+
         if(Integer.parseInt(getStatus)==1){
             holder.st.setText("Your order is under process");
-            holder.status.setBackgroundResource(R.color.design_default_color_error);
+            holder.status.setBackgroundColor(Color.parseColor("#ef8d32"));
         }
+
     }
 
     @NonNull
@@ -74,7 +71,6 @@ public class trackAdapter extends FirestoreRecyclerAdapter<trackModel,trackAdapt
             price=itemView.findViewById(R.id.textView64);
             status=itemView.findViewById(R.id.button18);
             st=itemView.findViewById(R.id.textView66);
-
         }
     }
 }

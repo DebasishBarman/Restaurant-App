@@ -4,12 +4,14 @@ import android.app.ProgressDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.RequestQueue;
@@ -42,6 +44,9 @@ public class myAdapter extends FirestoreRecyclerAdapter<model,myAdapter.myViewHo
 
     @Override
     protected void onBindViewHolder(@NonNull myViewHolder holder,final int position, @NonNull model model) {
+        //animation here
+        holder.foodRow.setAnimation(AnimationUtils.loadAnimation(holder.title.getContext(),R.anim.translate));
+
         holder.title.setText(model.getTitle());
         holder.price.setText(model.getPrice());
         holder.desc.setText(model.getDescription());
@@ -147,6 +152,7 @@ public class myAdapter extends FirestoreRecyclerAdapter<model,myAdapter.myViewHo
     }
 
     class myViewHolder extends RecyclerView.ViewHolder {
+        ConstraintLayout foodRow;
         ImageView img;
         TextView title,desc,price;
         Button buy;
@@ -155,6 +161,7 @@ public class myAdapter extends FirestoreRecyclerAdapter<model,myAdapter.myViewHo
                 super(itemView);
                 firebaseAuth=FirebaseAuth.getInstance();
                 img=itemView.findViewById(R.id.imageView3);
+                foodRow=itemView.findViewById(R.id.foodRow);
                 title=itemView.findViewById(R.id.titleRow);
                 price=itemView.findViewById(R.id.textView13);
                 desc=itemView.findViewById(R.id.textView12);
