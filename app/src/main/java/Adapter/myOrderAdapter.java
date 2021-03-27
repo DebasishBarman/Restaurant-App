@@ -23,6 +23,8 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.SetOptions;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -44,6 +46,7 @@ public class myOrderAdapter extends FirestoreRecyclerAdapter<finalOrderModel,myO
         holder.price.setText(model.getTotal_price());
         holder.id.setText(model.getOrder_id());
         holder.qty.setText(model.getQuantity());
+        holder.date.setText(model.getOrder_date());
 
        // Toast.makeText(holder.name.getContext(), ""+model.getAdmin_id(), Toast.LENGTH_SHORT).show();
 
@@ -53,12 +56,15 @@ public class myOrderAdapter extends FirestoreRecyclerAdapter<finalOrderModel,myO
             @Override
             public void onClick(View view) {
 
+                SimpleDateFormat sdf=new SimpleDateFormat("dd-MM-yyyy 'at' hh:MM:ss");
+                String dateTime=sdf.format(new Date());
                 //getting is of a particular data
                // holder.orderRow.setAnimation(AnimationUtils.loadAnimation(holder.name.getContext(),R.anim.translate_hide));
                 DocumentSnapshot snapshot=getSnapshots().getSnapshot(holder.getAdapterPosition());
                 String id=snapshot.getId();
                 DocumentReference reference=holder.fstore.collection("PlacedOrder").document(id);
                 Map<String,Object> plcorder =new HashMap<>();
+                plcorder.put("date_time",dateTime);
                 plcorder.put("status","1"); //for accepted*/
                 reference.update(plcorder).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
@@ -133,7 +139,7 @@ public class myOrderAdapter extends FirestoreRecyclerAdapter<finalOrderModel,myO
 
     class myOrderViewHolder extends RecyclerView.ViewHolder {
         ConstraintLayout orderRow;
-        TextView id,price,qty,name;
+        TextView id,price,qty,name,date;
         Button accept,reject;
         FirebaseFirestore fstore;
         FirebaseAuth auth;
@@ -142,6 +148,7 @@ public class myOrderAdapter extends FirestoreRecyclerAdapter<finalOrderModel,myO
             fstore=FirebaseFirestore.getInstance();
             auth=FirebaseAuth.getInstance();
             orderRow=itemView.findViewById(R.id.orderRow);
+            date=itemView.findViewById(R.id.textView68);
             id=itemView.findViewById(R.id.orderID);
             price=itemView.findViewById(R.id.textView18);
             qty=itemView.findViewById(R.id.qtyOrder);

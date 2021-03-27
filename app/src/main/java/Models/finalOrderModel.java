@@ -1,20 +1,29 @@
 package Models;
 
 public class finalOrderModel {
-    String user_id,admin_id,quantity,order_id,title,total_price,ids,address;
+    String user_id,admin_id,quantity,order_id,title,total_price,ids,address,order_date;
 
     public finalOrderModel() {
     }
 
-    public finalOrderModel(String user_id, String admin_id, String quantity, String order_id, String title, String total_price,String address) {
+    public finalOrderModel(String user_id, String admin_id, String quantity, String order_id, String title, String total_price, String ids, String address, String order_date) {
         this.user_id = user_id;
         this.admin_id = admin_id;
         this.quantity = quantity;
         this.order_id = order_id;
-        this.address=address;
         this.title = title;
         this.total_price = total_price;
         this.ids = ids;
+        this.address = address;
+        this.order_date = order_date;
+    }
+
+    public String getOrder_date() {
+        return order_date;
+    }
+
+    public void setOrder_date(String order_date) {
+        this.order_date = order_date;
     }
 
     public String getAddress() {

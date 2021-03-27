@@ -24,6 +24,8 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.SetOptions;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -147,9 +149,12 @@ public class Cart extends AppCompatActivity{
                             // Toast.makeText(this, "Total prices"+prices[i]*(items[i]), Toast.LENGTH_SHORT).show();
 
 
+                            SimpleDateFormat sdf=new SimpleDateFormat("dd-MM-yyyy 'at' hh:mm:ss");
+                            String curr=sdf.format(new Date());
                             root = db.collection("PlacedOrder").document();
                             Map<String, Object> add = new HashMap<>();
                             add.put("user_id", adapter.getSnapshots().get(i).getUser_id());
+                            add.put("order_date",curr);
                             add.put("order_id", adapter.getSnapshots().get(i).getOrder_id());
                             add.put("title", adapter.getSnapshots().get(i).getTitle());
                             add.put("price", String.valueOf(prices[i]));

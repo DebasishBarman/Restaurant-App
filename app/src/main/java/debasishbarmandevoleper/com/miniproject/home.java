@@ -7,6 +7,7 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -29,6 +30,9 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -43,6 +47,7 @@ public class home extends AppCompatActivity {
     FirebaseFirestore fStore=FirebaseFirestore.getInstance();
     DocumentReference dRefs;
     ProgressDialog progressDialog;
+    private Date date= Calendar.getInstance().getTime();
     private int flag;// 0 for admin 1 for user
 
     @Override
@@ -78,8 +83,12 @@ public class home extends AppCompatActivity {
         forgotPassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                EditText txt=new EditText(view.getContext());
-                AlertDialog.Builder dialog=new AlertDialog.Builder(view.getContext());
+                Toast.makeText(home.this, "Clicked", Toast.LENGTH_SHORT).show();
+                EditText txt=new EditText(home.this);
+                txt.setBackgroundResource(R.drawable.custom_input);
+                txt.setBackgroundColor(Color.parseColor("#6e7c7c"));
+                txt.setTextColor(Color.parseColor("#FFFFFFFF"));
+                AlertDialog.Builder dialog=new AlertDialog.Builder(home.this);
                 dialog.setTitle("Reset Password");
                 dialog.setMessage("Enter your email");
                 dialog.setView(txt);
@@ -87,6 +96,18 @@ public class home extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         Toast.makeText(home.this, "Yes clicked", Toast.LENGTH_SHORT).show();
+                        String mail=txt.getText().toString();
+                        fAuth.sendPasswordResetEmail(mail).addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void aVoid) {
+                                Toast.makeText(home.this, "Password reset link sent to your mail", Toast.LENGTH_SHORT).show();
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Toast.makeText(home.this, "Failed to sent reset mail", Toast.LENGTH_SHORT).show();
+                            }
+                        });
                     }
                 });
                 dialog.setNegativeButton("No", new DialogInterface.OnClickListener() {
@@ -95,6 +116,8 @@ public class home extends AppCompatActivity {
                         Toast.makeText(home.this, "No Clicked", Toast.LENGTH_SHORT).show();
                     }
                 });
+                dialog.create();
+                dialog.show();
             }
         });
 

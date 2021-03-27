@@ -23,7 +23,6 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="534dp">
-
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/items"
             android:layout_width="match_parent"
