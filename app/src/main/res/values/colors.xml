@@ -9,4 +9,19 @@
     <color name="white">#FFFFFFFF</color>
     <color name="custom1">#E4FBFF</color>
     <color name="purple">#4a47a3</color>
+    <color name="color1">#d6dfd0</color>
+    <color name="color2">#f8f5b5</color>
+    <color name="color3">#faf7f3</color>
+    <color name="color4">#dbf6e9</color>
+    <color name="color5">#9ddfd3</color>
+    <color name="color6">#f4f9f9</color>
+    <integer-array name="colors">
+        <item>@color/color1</item>
+        <item>@color/color2</item>
+        <item>@color/color3</item>
+        <item>@color/color4</item>
+        <item>@color/color5</item>
+        <item>@color/color6</item>
+        <item>@color/purple_200</item>
+    </integer-array>
 </resources>

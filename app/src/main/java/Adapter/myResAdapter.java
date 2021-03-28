@@ -24,6 +24,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.Random;
+
 import Models.resModel;
 import debasishbarmandevoleper.com.miniproject.R;
 import debasishbarmandevoleper.com.miniproject.User_Profile;
@@ -38,6 +40,7 @@ public class myResAdapter extends FirestoreRecyclerAdapter<resModel,myResAdapter
     @Override
     protected void onBindViewHolder(@NonNull viewHolder holder, int position, @NonNull resModel model) {
 
+        //holder.catContainer.setBackgroundColor();
         holder.catContainer.setAnimation(AnimationUtils.loadAnimation(holder.textView.getContext(),R.anim.fade));
         holder.textView.setText(model.getName());
         Glide.with(holder.textView.getContext()).load(model.getImageUri()).into(holder.imageView);
@@ -86,7 +89,9 @@ public class myResAdapter extends FirestoreRecyclerAdapter<resModel,myResAdapter
             catContainer=itemView.findViewById(R.id.catContainer);
             textView=itemView.findViewById(R.id.pizza);
             imageView=itemView.findViewById(R.id.imageView8);
-
+            int[] color=itemView.getResources().getIntArray(R.array.colors);
+            int randomColor=color[new Random().nextInt(color.length)];
+            catContainer.setBackgroundColor(randomColor);
         }
     }
 }

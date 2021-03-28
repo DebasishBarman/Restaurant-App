@@ -1,18 +1,26 @@
 package Models;
 
 public class trackModel {
-    String price,quantity,status,address,order_id,title;
+    String price,quantity,status,address,order_id,title,order_date;
     public trackModel(){
-
     }
 
-    public trackModel(String price, String quantity, String status, String address, String order_id, String title) {
+    public trackModel(String price, String quantity, String status, String address, String order_id, String title, String order_date) {
         this.price = price;
         this.quantity = quantity;
         this.status = status;
         this.address = address;
         this.order_id = order_id;
         this.title = title;
+        this.order_date = order_date;
+    }
+
+    public String getOrder_date() {
+        return order_date;
+    }
+
+    public void setOrder_date(String order_date) {
+        this.order_date = order_date;
     }
 
     public String getTitle() {

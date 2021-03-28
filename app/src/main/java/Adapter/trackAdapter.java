@@ -36,6 +36,7 @@ public class trackAdapter extends FirestoreRecyclerAdapter<trackModel,trackAdapt
         holder.title.setText(model.getTitle());
         holder.price.setText(model.getPrice());
         holder.quantity.setText(model.getQuantity());
+        holder.date.setText(model.getOrder_date());
 
         DocumentSnapshot snapshot=getSnapshots().getSnapshot(holder.getAdapterPosition());
         String getStatus=snapshot.getString("status");
@@ -62,7 +63,7 @@ public class trackAdapter extends FirestoreRecyclerAdapter<trackModel,trackAdapt
 
     class viewHolder extends RecyclerView.ViewHolder{
 
-        TextView price,address,quantity,title,st;
+        TextView price,address,quantity,title,st,date;
         Button status;
         public viewHolder(@NonNull View itemView) {
             super(itemView);
@@ -71,6 +72,7 @@ public class trackAdapter extends FirestoreRecyclerAdapter<trackModel,trackAdapt
             price=itemView.findViewById(R.id.textView64);
             status=itemView.findViewById(R.id.button18);
             st=itemView.findViewById(R.id.textView66);
+            date=itemView.findViewById(R.id.textView69);
         }
     }
 }
