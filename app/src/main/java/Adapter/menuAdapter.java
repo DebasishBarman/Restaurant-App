@@ -68,7 +68,6 @@ public class menuAdapter extends FirestoreRecyclerAdapter<menuModel,menuAdapter.
                 i.putExtra("desc",model.getDescription());
                 i.putExtra("imgurl",model.getImgUrl());
                 i.putExtra("id",id);
-
                 ((Activity)holder.img.getContext()).startActivity(i);
             }
         });

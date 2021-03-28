@@ -19,18 +19,18 @@
             android:layout_height="41dp"
             android:layout_marginStart="16dp"
             android:layout_marginLeft="16dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="7dp"
             android:background="@drawable/custom_button"
             android:drawableLeft="@drawable/ic_baseline_check"
-            android:paddingStart="44dp"
-            android:textColor="@color/black"
-            android:paddingEnd="44dp"
             android:gravity="center"
+            android:paddingStart="44dp"
+            android:paddingEnd="44dp"
             android:text="Accept"
+            android:textColor="@color/black"
             app:layout_constraintEnd_toStartOf="@+id/button5"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/qtyOrder" />
+            app:layout_constraintTop_toBottomOf="@+id/textView67" />
 
         <Button
             android:id="@+id/button5"
@@ -38,25 +38,27 @@
             android:layout_height="41dp"
             android:layout_marginStart="19dp"
             android:layout_marginLeft="19dp"
-            android:layout_marginTop="6dp"
+            android:layout_marginTop="7dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginRight="16dp"
             android:background="@drawable/custom_button"
+            android:backgroundTint="@color/design_default_color_error"
             android:drawableStart="@drawable/ic_baseline_close_24"
             android:drawableLeft="@drawable/ic_baseline_close_24"
             android:paddingStart="44dp"
             android:paddingEnd="44dp"
-            android:backgroundTint="@color/design_default_color_error"
             android:text="Reject"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/button4"
-            app:layout_constraintTop_toBottomOf="@+id/textView19" />
+            app:layout_constraintTop_toBottomOf="@+id/textView22" />
 
         <TextView
             android:id="@+id/nameOder"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginLeft="4dp"
             android:layout_marginTop="16dp"
             android:text="titleTv"
             app:layout_constraintStart_toEndOf="@+id/textView20"
@@ -68,7 +70,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
             android:layout_marginLeft="12dp"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="35dp"
             android:text="Oder ID"
             android:textSize="18sp"
             app:layout_constraintStart_toStartOf="parent"
@@ -82,7 +84,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginLeft="8dp"
-            android:layout_marginTop="44dp"
+            android:layout_marginTop="40dp"
             android:text="_______"
             android:textColor="#37F122"
             android:textSize="14sp"
@@ -95,15 +97,13 @@
 
             android:layout_height="wrap_content"
 
-            android:layout_marginStart="152dp"
-            android:layout_marginLeft="152dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="6dp"
+            android:layout_marginStart="155dp"
+            android:layout_marginLeft="155dp"
+            android:layout_marginTop="12dp"
             android:text="Price"
             android:textSize="18sp"
-            app:layout_constraintBottom_toTopOf="@+id/button5"
-            app:layout_constraintStart_toEndOf="@+id/textView22"
-            app:layout_constraintTop_toBottomOf="@+id/textView20" />
+            app:layout_constraintStart_toEndOf="@+id/textView20"
+            app:layout_constraintTop_toBottomOf="@+id/textView17" />
 
         <TextView
             android:id="@+id/textView18"
@@ -111,10 +111,8 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
             android:layout_marginLeft="12dp"
-            android:layout_marginTop="117dp"
-            android:layout_marginBottom="6dp"
+            android:layout_marginTop="72dp"
             android:text="______"
-            app:layout_constraintBottom_toTopOf="@+id/button5"
             app:layout_constraintStart_toEndOf="@+id/textView19"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -124,34 +122,34 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
             android:layout_marginLeft="12dp"
-            android:layout_marginTop="11dp"
+            android:layout_marginTop="12dp"
             android:text="Food Title"
             android:textSize="18dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView17" />
 
         <TextView
-            android:id="@+id/qtyOrder"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="20dp"
-            android:text="TextView"
-            app:layout_constraintStart_toEndOf="@+id/textView22"
-            app:layout_constraintTop_toBottomOf="@+id/nameOder" />
-
-        <TextView
             android:id="@+id/textView22"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="12dp"
-            android:layout_marginLeft="12dp"
+            android:layout_marginStart="150dp"
+            android:layout_marginLeft="150dp"
             android:layout_marginTop="16dp"
             android:text="Quantity"
             android:textSize="18sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView20" />
+            app:layout_constraintStart_toEndOf="@+id/textView67"
+            app:layout_constraintTop_toBottomOf="@+id/textView19" />
+
+        <TextView
+            android:id="@+id/qtyOrder"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginLeft="4dp"
+            android:layout_marginTop="24dp"
+            android:text="TextView"
+            app:layout_constraintStart_toEndOf="@+id/textView22"
+            app:layout_constraintTop_toBottomOf="@+id/textView18" />
 
         <TextView
             android:id="@+id/textView23"
@@ -175,24 +173,24 @@
             android:id="@+id/textView67"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="136dp"
-            android:layout_marginLeft="136dp"
-            android:layout_marginTop="11dp"
+            android:layout_marginStart="11dp"
+            android:layout_marginLeft="11dp"
+            android:layout_marginTop="16dp"
             android:text="Order Date"
             android:textSize="18dp"
-            app:layout_constraintStart_toEndOf="@+id/textView20"
-            app:layout_constraintTop_toBottomOf="@+id/textView17" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView20" />
 
         <TextView
             android:id="@+id/textView68"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="80dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginLeft="4dp"
+            android:layout_marginTop="20dp"
             android:text="TextView"
             app:layout_constraintStart_toEndOf="@+id/textView67"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/nameOder" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

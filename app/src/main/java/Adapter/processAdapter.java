@@ -20,6 +20,8 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -51,8 +53,11 @@ public class processAdapter extends FirestoreRecyclerAdapter<finalOrderModel,pro
                                 ///setting status to 3 ==processing;
                                 DocumentSnapshot snapshot=getSnapshots().getSnapshot(holder.getAdapterPosition());
                                 String id=snapshot.getId();
+                                SimpleDateFormat sdf=new SimpleDateFormat("dd-MM-yyyy 'at' hh:MM:ss");
+                                String dateTime=sdf.format(new Date());
                                 DocumentReference reference=holder.db.collection("PlacedOrder").document(id);
                                 Map<String,Object> plcorder =new HashMap<>();
+                               // plcorder.put("date_time",dateTime);
                                 plcorder.put("status","3"); //for processing*/
                                 reference.update(plcorder).addOnSuccessListener(new OnSuccessListener<Void>() {
                                     @Override
@@ -69,6 +74,7 @@ public class processAdapter extends FirestoreRecyclerAdapter<finalOrderModel,pro
                                 ////
                                 DocumentReference ref=holder.db.collection("DeliveryList").document();
                                 Map<String,Object> map=new HashMap<>();
+                                map.put("order_date",dateTime);
                                 map.put("title",model.getTitle());
                                 map.put("order_id",model.getOrder_id());
                                 map.put("user_id",model.getUser_id());
@@ -93,8 +99,6 @@ public class processAdapter extends FirestoreRecyclerAdapter<finalOrderModel,pro
                             else{
                                 Toast.makeText(holder.info.getContext(), "Info failed", Toast.LENGTH_SHORT).show();
                             }
-
-
                         }
                     });
                     return;

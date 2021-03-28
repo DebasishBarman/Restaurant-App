@@ -18,8 +18,14 @@ import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentId;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 import Models.delvModelAdmin;
 import debasishbarmandevoleper.com.miniproject.R;
@@ -46,9 +52,16 @@ public class adminDeliverAdapter extends FirestoreRecyclerAdapter<delvModelAdmin
         holder.deliver.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                firestore.collection("DeliveryList").document(getSnapshots().getSnapshot(position).getId())
-                        .update("status","2")
+                SimpleDateFormat sdf=new SimpleDateFormat("dd-MM-yyyy 'at' hh:MM:ss");
+                String dateTime=sdf.format(new Date());
+                String id=getSnapshots().getSnapshot(holder.getAdapterPosition()).getId().toString();
+                DocumentReference reference=firestore.collection("DeliveryList").document(id);
+                Map<String,Object> map=new HashMap<>();
+                map.put("status","2");
+                map.put("date_time",dateTime);
+                //
+                // firestore.collection("DeliveryList").document(getSnapshots().getSnapshot(position).getId())
+                        reference.update(map)
                         .addOnSuccessListener(aVoid ->
                                 Toast.makeText(holder.dish.getContext(), "Delivery Successfull",
                                         Toast.LENGTH_SHORT).show());
